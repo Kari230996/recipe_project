@@ -1,0 +1,72 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}{{ recipe.title }}{% endblock %}
+
+{% block content %}
+    <div class="container2">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="recipe-details">
+                    <h1 class="recipe-title">{{ recipe.title }}</h1>
+                    {% if recipe.image %}
+                        <img src="{{ recipe.image.url }}" alt="Recipe Image" class="img-fluid recipe-image larger-image">
+                    {% endif %}
+                    <div class="recipe-meta">
+                        <p><strong>Cooking Time:</strong> {{ recipe.cooking_time }} minutes</p>
+                        <p><strong>Category:   </strong><a href="{% url 'category_detail' category=recipe.category %}" class="category-link1">{{ recipe.category }}</a></p>
+                        <p><strong>Author:   </strong> <a href="{% url 'author_profile' pk=recipe.author.pk %}" class="author-link">{{ recipe.author }}</a></p>
+                    
+                    </div>
+                    <hr>
+                    <div class="recipe-description">
+                        <h2>Description:</h2>
+                        
+                        <p>{{ recipe.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <a href="{% url 'category_detail' category=recipe.category %}" class="btn btn-primary backwards">Back to {{ recipe.category }}</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Ingredients:</h2>
+                <hr>
+                <ul class="list-group">
+                    {% for ingredient in ingredients %}
+                        <li class="list-group-item">{{ ingredient.name }} - {{ ingredient.quantity }} {{ ingredient.unit }}</li>
+                    {% empty %}
+                        <li class="list-group-item">No ingredients found.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <h2>Instructions:</h2>
+                <hr>
+                <div class="instructions">
+                    <ol class="list-group">
+                        {% for step in steps %}
+                            <li class="list-group-item">
+                                <div class="step-description">
+                                    <p>{{ step.description }}</p>
+                                </div>
+                                {% if step.image %}
+                                    <div class="step-image">
+                                        <img src="{{ step.image.url }}" alt="Step Image" class="img-fluid smaller-image">
+                                    </div>
+                                {% endif %}
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item">No instructions found.</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

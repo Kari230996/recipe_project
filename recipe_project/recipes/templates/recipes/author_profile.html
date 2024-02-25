@@ -1,0 +1,15 @@
+
+{% extends 'recipes/base.html' %}
+
+{% block content %}
+    <h1>{{ author.username }}'s Profile</h1>
+    <h2>Recipes</h2>
+    <ul>
+        {% for recipe in recipes %}
+        <li><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ recipe.title }}</a></li>
+            
+        {% empty %}
+            <li>No recipes found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
