@@ -1,0 +1,46 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}Your Recipes{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center mb-4">Your Recipes</h1>
+            <form method="post" id="delete-recipes-form">
+                <button type="button" id="delete-selected-recipes" class="btn btn-danger delete-button">Delete Selected Recipes</button>
+                {% csrf_token %}
+                <ul class="list-group">
+                    {% for recipe in recipes %}
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <input type="checkbox" name="selected_recipes" value="{{ recipe.pk }}">
+                                    <a href="{% url 'recipe_detail' recipe.pk %}" class="recipe-link">{{ recipe.title }}</a>
+                                </div>
+                                <div class="btn-group" role="group" aria-label="Recipe Actions">
+                                    <a href="{% url 'recipe_update' recipe.pk %}" class="btn btn-sm btn-primary update-button">
+                                        <i class="fas fa-sync-alt"></i> 
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">No recipes found.</li>
+                    {% endfor %}
+                </ul>
+                <button type="button" id="delete-selected-recipes" class="btn btn-danger delete-button">Delete Selected Recipes</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            
+            $('#delete-selected-recipes').click(function() {
+                if (confirm("Are you sure you want to delete the selected recipes?")) {
+                    $('#delete-recipes-form').submit();
+                }
+            });
+        });
+    </script>
+{% endblock %}
+

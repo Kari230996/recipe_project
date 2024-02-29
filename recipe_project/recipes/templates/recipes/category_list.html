@@ -1,0 +1,12 @@
+
+{% extends 'recipes/base.html' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+    <div class="category-container">
+        {% for category in categories %}
+            <a href="{% url 'category_detail' category %}" class="category-link">{{ category }}</a>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <title>{% block title %}Recipe App{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="brand"> 
+                <h1><a href="{% url 'recipe_list' %}">Recipe App</a></h1>
+            </div>
+
+            <!-- <div id="searchBar">
+                <div class="search-container">         
+                    <input type="text" placeholder="Search..." id="search-bar">
+                    <img src="{% static 'images/search-icon.svg' %}" alt="search" id="search-logo">
+                </div> 
+            </div> -->
+
+
+
+            <nav class="navbar">
+                <ul class="navbar-links">
+                    {% if user.is_authenticated %}
+                        <li>Welcome, {{ user.username }}</li>
+                        <li><a href="{% url 'recipe_list' %}">Home</a></li>
+                        <li><a href="{% url 'category_list' %}">Categories</a></li>
+                        <li><a href="{% url 'recipe_create' %}">Create Recipe</a></li>
+                        <li><a href="{% url 'user_recipe_list' %}">Your Recipes</a></li>
+                        <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li> 
+                    {% else %}
+                        <li><a href="{% url 'recipe_list' %}">Home</a></li>
+                        <li><a href="{% url 'category_list' %}">Categories</a></li>
+                        <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li> 
+                        <li><a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a></li> 
+                    {% endif %}
+                </ul>
+            </nav>
+            <a href="#" class="nav-menu"><img src="{% static 'images/menu-icon.svg' %}" alt="Menu" id="menu-icon"></a>
+        </div>
+        <div class="menu-bar" id="menuBar">
+            <h1 style="margin-bottom: 15px;">MENU</h1>
+            <ul id="navbar-items">
+                {% if user.is_authenticated %}
+                    <li>Welcome, {{ user.username }}</li>
+                    <li><a href="{% url 'recipe_list' %}">Home</a></li>
+                    <li><a href="{% url 'category_list' %}">Categories</a></li>
+                    <li><a href="{% url 'recipe_create' %}">Create Recipe</a></li>
+                    <li><a href="{% url 'user_recipe_list' %}">Your Recipes</a></li>
+                    <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li> 
+                {% else %}
+                    <li><a href="{% url 'recipe_list' %}">Home</a></li>
+                    <li><a href="{% url 'category_list' %}">Categories</a></li>
+                    <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li> 
+                    <li><a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a></li> 
+                {% endif %}
+            </ul>
+        </div>
+    </header>
+    
+    
+    <main>
+        <div class="container">
+            {% block content %}
+            
+            {% endblock %}
+        </div>
+    </main>
+
+    <script>
+
+        $(document).ready(function() {
+            // Toggle menu bar when menu icon is clicked
+            $('.nav-menu').click(function() {
+                $('.menu-bar').toggle();
+            });
+        });
+
+
+
+        // Search Bar
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     const searchLogo = document.getElementById('search-logo');
+        //     const searchBar = document.getElementById('search-bar');
+
+        //     searchLogo.addEventListener('click', () => {
+        //         searchBar.classList.toggle('active');
+        //         if (searchBar.classList.contains('active')) {
+        //             searchBar.focus();
+        //         } else {
+        //             searchBar.blur();
+        //         }
+        // });
+
+        // searchBar.addEventListener('blur', () => {
+        //     searchBar.classList.remove('active');
+        // });
+        // });
+
+    </script>
+
+    </body>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Recipe App. All rights reserved.</p>
+        </div>
+    </footer>
+</html>

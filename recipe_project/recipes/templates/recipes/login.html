@@ -1,0 +1,17 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+        {% if user.is_authenticated %}
+            <p>Welcome, {{ user.username }}</p>
+        {% endif %}
+    </div>
+{% endblock %}
