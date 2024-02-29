@@ -2,20 +2,19 @@
 from random import sample
 from django.db.models.query import QuerySet
 from django.forms import BaseModelForm, inlineformset_factory
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect, HttpRequest
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Recipe, RecipeStep, Ingredient, Category
-from .forms import DeleteRecipesForm, RecipeForm, RecipeStepForm, IngredientForm, UserRegistrationForm
+from .forms import DeleteRecipesForm, RecipeForm, RecipeStepForm, IngredientForm, UserRegistrationForm, IngredientFormSet, RecipeStepFormSet
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib import messages
 from django.views.generic import FormView
-
 
 
 #CRUD
@@ -41,6 +40,7 @@ class RecipeDetailView(DetailView):
         context['ingredients'] = recipe.ingredients.all()
         context['steps'] = recipe.steps.all()
         return context
+
 
 
 class RecipeCreateView(LoginRequiredMixin, CreateView):

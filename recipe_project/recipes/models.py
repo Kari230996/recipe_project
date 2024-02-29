@@ -25,6 +25,8 @@ class Recipe(models.Model):
     def get_absolute_url(self):
         return reverse('recipe_detail', kwargs={'pk': self.pk})
     
+    
+    
 class Ingredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredients')
     name = models.CharField(max_length=50)

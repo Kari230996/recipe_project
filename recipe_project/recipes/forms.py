@@ -26,8 +26,8 @@ class RecipeForm(forms.ModelForm):
         self.fields['category'].widget = forms.Select(choices=Recipe.category_choices)
 
 
-# IngredientFormSet = inlineformset_factory(Recipe, Ingredient, form=IngredientForm, extra=1)
-# RecipeStepFormSet = inlineformset_factory(Recipe, RecipeStep, form=RecipeStepForm, extra=1, can_delete=True)
+IngredientFormSet = inlineformset_factory(Recipe, Ingredient, form=IngredientForm, extra=1)
+RecipeStepFormSet = inlineformset_factory(Recipe, RecipeStep, form=RecipeStepForm, extra=1, can_delete=True)
 
 
 class CategoryForm(forms.ModelForm):

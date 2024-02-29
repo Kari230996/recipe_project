@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,10 +27,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-w4av**)jbka*k$+mly#c4ps2l1%j*(znczelvg^iit4b--*us-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = []
 
+
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'gb-recipe-app.com',
+]
+
+INTERNAL_IPS = [
+'127.0.0.1',
+]
 
 # Application definition
 
@@ -39,7 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'recipes',
-    'fontawesomefree'
+    'fontawesomefree', 
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 ]
 
 ROOT_URLCONF = 'recipe_project.urls'
@@ -75,6 +91,9 @@ WSGI_APPLICATION = 'recipe_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+
+
+
 
 DATABASES = {
     'default': {
@@ -133,3 +152,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

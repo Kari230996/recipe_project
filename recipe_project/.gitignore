@@ -1,1 +1,6 @@
 __pycache__/
+/media/
+/static/
+*.sqlite3
+*.log
+*.pyc
