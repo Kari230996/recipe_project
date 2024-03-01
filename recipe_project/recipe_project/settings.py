@@ -35,11 +35,11 @@ CSRF_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'gb-recipe-app.com',
+    'gb-recipeapp.com',
 ]
 
 INTERNAL_IPS = [
-'127.0.0.1',
+    '127.0.0.1',
 ]
 
 # Application definition
@@ -92,6 +92,20 @@ WSGI_APPLICATION = 'recipe_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'karinaapaeva$default',
+#         'USER': 'karinaapaeva',
+#         'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+#         'HOST': 'karinaapaeva.mysql.pythonanywhere-services.com',
+#     'OPTIONS': {
+#         'init_command': "SET NAMES 'utf8mb4';SET sql_mode='STRICT_TRANS_TABLES'",
+#         'charset': 'utf8mb4',
+#         },
+#     }
+# }
 
 
 
